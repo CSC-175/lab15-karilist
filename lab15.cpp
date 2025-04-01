@@ -6,30 +6,31 @@ void getInfo(int&, int&);
 double computeWays(int, int);
 double factorial(int);
 
-/*******************************************************************
-* getLotteryInfo                                                   *
-* Gets and validates lottery info from the user and places it in   *
-* reference parameters referencing variables in the main function. *
-********************************************************************/
-
-
-
-/*******************************************************************
-* computeWays                                                      *
-* Computes and returns the number of different possible sets       *
-* of k numbers that can be chosen from a set of n numbers.         *
-* The formula for this is     k!(n- k)!                            *
-*                             --------                             *
-*                                 n!                               *
-* Note that the computation is done in a way that does not require *
-* multiplying two factorials together. This is done to prevent any *
-* intermediate result becoming so large that it causes overflow.   *
-********************************************************************/
-
-
-/*******************************************************************
-* factorial                                                        *
-* This function computes factorials recursively.                   *
-*******************************************************************/
+void getInfo(int &pick1, int &pick2) {
+    cout << "How many balls (1-12) are in the pool to pick from? ";
+    while (!(cin >> pick1) || pick1 < 1 || pick1 > 12) {
+        cin.clear();
+        cin.ignore( 100, '\n');
+        cout << "Input Error! ";
+        cout << "How many balls (1-12) are in the pool to pick from? ";
+    }
+    cout << "How many balls (1-" << pick1 << ") will be drawn? ";
+    while (!(cin >> pick2) || pick2 < 1 || pick2 > pick1) {
+        cin.clear();
+        cin.ignore( 100, '\n');
+        cout << "Input Error! Must be between 1 and " << pick1 << " balls.\n";
+        cout << "How many balls (1-" << pick1 << ") will be drawn? ";
+    }
+}
+double computeWays(int n, int k) {
+    return 1.0 / (factorial(n) / ((factorial(k)) * factorial(n -k)));
+}
+double factorial(int num) {
+   double result = 1;
+    for (int i = 2; i <= num; i++) {
+        result *= i;
+        return result;
+    }
+}
 
 
