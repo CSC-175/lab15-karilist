@@ -6,31 +6,28 @@ void getInfo(int&, int&);
 double computeWays(int, int);
 double factorial(int);
 
-void getInfo(int &pick1, int &pick2) {
+void getInfo(int &n, int &k) {
     cout << "How many balls (1-12) are in the pool to pick from? ";
-    while (!(cin >> pick1) || pick1 < 1 || pick1 > 12) {
+    while (!(cin >> n) || n < 1 || n > 12) {
         cin.clear();
         cin.ignore( 100, '\n');
-        cout << "Input Error! ";
+        cout << "Input Error! There must be between 1 and 12 balls.\n";
         cout << "How many balls (1-12) are in the pool to pick from? ";
     }
-    cout << "How many balls (1-" << pick1 << ") will be drawn? ";
-    while (!(cin >> pick2) || pick2 < 1 || pick2 > pick1) {
+    cout << "How many balls (1-" << n << ") will be drawn? ";
+    while (!(cin >> k) || k < 1 || k > n) {
         cin.clear();
         cin.ignore( 100, '\n');
-        cout << "Input Error! Must be between 1 and " << pick1 << " balls.\n";
-        cout << "How many balls (1-" << pick1 << ") will be drawn? ";
+        cout << "Input Error! \n";
+        cout << "How many balls (1-" << n << ") will be drawn? ";
     }
 }
 double computeWays(int n, int k) {
-    return 1.0 / (factorial(n) / ((factorial(k)) * factorial(n -k)));
+    return 1.0 / (factorial(n) / (factorial(k) * factorial(n - k)));
 }
 double factorial(int num) {
-   double result = 1;
-    for (int i = 2; i <= num; i++) {
-        result *= i;
-        return result;
-    }
+    if (num <= 1) return 1;
+    return num * factorial(num - 1);
 }
 
 
